@@ -16,6 +16,10 @@ pip-delete-this-directory.txt
 *.log
 local_settings.py
 backend/db.sqlite3
+.env
+.env.development
+.env.production
+backend/.env
 
 # Node
 frontend/node_modules/

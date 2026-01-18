@@ -30,11 +30,18 @@ This project is a monorepo containing a Django backend and a React frontend.
     ```bash
     pip install -r requirements.txt
     ```
-5.  Run the migrations:
+5.  **Environment Configuration:**
+    Create a `.env` file by copying the example file. This file will hold your secret keys and environment-specific settings.
+    ```bash
+    cp .env.example .env
+    ```
+    Review and update the `backend/.env` file with your settings if needed.
+
+6.  Run the migrations:
     ```bash
     python manage.py migrate
     ```
-6.  Start the development server:
+7.  Start the development server:
     ```bash
     python manage.py runserver
     ```
@@ -54,7 +61,15 @@ This project is a monorepo containing a Django backend and a React frontend.
     ```bash
     yarn install
     ```
-3.  Start the development server:
+3.  **Environment Configuration:**
+    Create local environment files by copying the example files. These will store the API URL for different environments.
+    ```bash
+    cp .env.development.example .env.development
+    cp .env.production.example .env.production
+    ```
+    Update the `frontend/.env.development` and `frontend/.env.production` files with the correct API URLs for your environments.
+
+4.  Start the development server:
     ```bash
     npm start
     ```
@@ -62,12 +77,12 @@ This project is a monorepo containing a Django backend and a React frontend.
     ```bash
     yarn start
     ```
-    The frontend will be running at `http://localhost:3000`.
+    The frontend will be running at `http://localhost:3000/add`.
 
 ## Usage
 
--   Open your browser and go to `http://localhost:3000/submit` to submit a new item.
--   Open your browser and go to `http://localhost:3000/list` to see the list of items.
+-   Open your browser and go to `http://localhost:3000/add` to add a new professional.
+-   Navigate to the "View Professionals" tab or go to `http://localhost:3000/list` to see the list of professionals.
 
 ## Production Readiness Recommendations
 

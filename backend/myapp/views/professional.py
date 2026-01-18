@@ -15,6 +15,8 @@ class ProfessionalListCreate(generics.ListCreateAPIView):
         return queryset
 
 class ProfessionalBulkUpsert(APIView):
+    serializer_class = ProfessionalSerializer # For schema generation
+    
     def post(self, request, *args, **kwargs):
         profiles = request.data
         if not isinstance(profiles, list):
@@ -24,15 +26,15 @@ class ProfessionalBulkUpsert(APIView):
         failure_count = 0
         errors = []
 
-        for profile_data in profiles:
+        for i, profile_data in enumerate(profiles):
             email = profile_data.get('email')
             phone = profile_data.get('phone')
-            
+
             instance = None
             if email:
-                instance = Professional.objects.filter(email=email).first()
+                instance = Professional.objects.filter(email=email).first() # Find by email
             if not instance and phone:
-                instance = Professional.objects.filter(phone=phone).first()
+                instance = Professional.objects.filter(phone=phone).first() # Find by phone if email not found
 
             if instance:
                 serializer = ProfessionalSerializer(instance, data=profile_data, partial=True)
@@ -43,8 +45,13 @@ class ProfessionalBulkUpsert(APIView):
                 serializer.save()
                 success_count += 1
             else:
-                failure_count += 1
-                errors.append(serializer.errors)
+                failure_count += 1 # Increment failure count
+                error_detail = {"index": i, "validation_errors": serializer.errors}
+                if email:
+                    error_detail["email"] = email
+                if phone:
+                    error_detail["phone"] = phone
+                errors.append(error_detail) # Collect detailed errors
 
         return Response({
             "success_count": success_count,

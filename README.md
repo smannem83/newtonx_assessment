@@ -46,6 +46,8 @@ This project is a monorepo containing a Django backend and a React frontend.
     python manage.py runserver
     ```
     The backend will be running at `http://127.0.0.1:8000`.
+    
+8.  Swagger documentation will be available at `http://127.0.0.1:8000/api/schema/swagger-ui/`
 
 ## Frontend Setup
 
@@ -83,6 +85,8 @@ This project is a monorepo containing a Django backend and a React frontend.
 
 -   Open your browser and go to `http://localhost:3000/add` to add a new professional.
 -   Navigate to the "View Professionals" tab or go to `http://localhost:3000/list` to see the list of professionals.
+
+
 
 ## Production Readiness Recommendations
 
